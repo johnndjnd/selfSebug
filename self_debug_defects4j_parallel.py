@@ -346,7 +346,7 @@ def process_defects4j_dataset_parallel(dataset_path: str, output_path: str, limi
 
 def run_validation(patch_file: str, dataset_path: str, output_dir: str):
     """
-    运行sf_val_d4j验证
+    运行sf_val_d4j验证，显示实时进度
     Args:
         patch_file: 补丁文件路径
         dataset_path: 数据集路径
@@ -361,6 +361,16 @@ def run_validation(patch_file: str, dataset_path: str, output_dir: str):
         logger.error(f"Validation script not found: {val_script}")
         return
     
+    # 读取补丁文件获取总数量以显示进度
+    try:
+        with open(patch_file, 'r', encoding='utf-8') as f:
+            patches_data = json.load(f)
+        total_bugs = len(patches_data)
+        logger.info(f"📊 Total bugs to validate: {total_bugs}")
+    except Exception as e:
+        logger.error(f"Error reading patch file: {e}")
+        total_bugs = 0
+    
     cmd = [
         sys.executable, val_script,
         '-i', patch_file,
@@ -371,19 +381,99 @@ def run_validation(patch_file: str, dataset_path: str, output_dir: str):
     logger.info(f"Running validation command: {' '.join(cmd)}")
     
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)  # 1小时超时
+        # 启动验证进程并实时显示输出
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, 
+                                 text=True, bufsize=1, universal_newlines=True)
         
-        if result.returncode == 0:
+        # 启动进度监控线程
+        import threading
+        stop_monitoring = threading.Event()
+        monitor_thread = threading.Thread(target=monitor_validation_progress, 
+                                        args=(output_dir, total_bugs, stop_monitoring))
+        monitor_thread.daemon = True
+        monitor_thread.start()
+        
+        # 实时输出验证日志
+        while True:
+            output = process.stdout.readline()
+            if output == '' and process.poll() is not None:
+                break
+            if output:
+                # 过滤和格式化输出
+                line = output.strip()
+                if line:
+                    if '[PATCH STATUS]' in line:
+                        logger.info(f"🔍 {line}")
+                    elif '[TIME INFO]' in line:
+                        logger.info(f"⏱️ {line}")
+                    elif '[CHECKOUT]' in line:
+                        logger.info(f"📦 {line}")
+                    elif 'END VALIDATION' in line:
+                        logger.info(f"✅ {line}")
+                    else:
+                        logger.debug(f"[VAL] {line}")
+        
+        # 停止监控并等待进程完成
+        stop_monitoring.set()
+        return_code = process.wait()
+        
+        if return_code == 0:
             logger.info("✅ Validation completed successfully!")
-            logger.info(f"Validation output: {result.stdout}")
+            logger.info(f"📁 Results saved to: {output_dir}")
         else:
-            logger.error(f"❌ Validation failed with return code {result.returncode}")
-            logger.error(f"Error output: {result.stderr}")
+            logger.error(f"❌ Validation failed with return code {return_code}")
             
     except subprocess.TimeoutExpired:
         logger.error("❌ Validation timed out after 1 hour")
     except Exception as e:
         logger.error(f"❌ Error running validation: {e}")
+
+def monitor_validation_progress(output_dir: str, total_bugs: int, stop_event):
+    """
+    监控验证进度
+    """
+    import time
+    
+    if total_bugs == 0:
+        return
+    
+    start_time = time.time()
+    last_count = 0
+    
+    while not stop_event.is_set():
+        try:
+            if not os.path.exists(output_dir):
+                time.sleep(5)
+                continue
+            
+            # 统计已完成的验证文件
+            import glob
+            completed_files = glob.glob(os.path.join(output_dir, '*-validated.jsonl'))
+            completed_count = len(completed_files)
+            
+            if completed_count > last_count:
+                elapsed_time = time.time() - start_time
+                progress_percent = (completed_count / total_bugs) * 100
+                
+                if completed_count > 0:
+                    avg_time_per_bug = elapsed_time / completed_count
+                    remaining_bugs = total_bugs - completed_count
+                    eta_seconds = avg_time_per_bug * remaining_bugs
+                    eta_minutes = eta_seconds / 60
+                    
+                    logger.info(f"📈 Progress: {completed_count}/{total_bugs} ({progress_percent:.1f}%) "
+                              f"| Elapsed: {elapsed_time/60:.1f}m | ETA: {eta_minutes:.1f}m")
+                
+                last_count = completed_count
+            
+            if completed_count >= total_bugs:
+                break
+                
+            time.sleep(15)  # 每15秒检查一次
+            
+        except Exception as e:
+            logger.debug(f"Progress monitoring error: {e}")
+            time.sleep(15)
 
 def parse_validation_results(validation_output_dir: str) -> Dict:
     """
@@ -482,7 +572,7 @@ def main():
                        default='dataset_test/SRepair/SRepair/dataset/defects4j-sf.json',
                        help='Path to defects4j-sf.json dataset')
     parser.add_argument('--output', '-o', type=str,
-                       default='dataset_test/SRepair/results/sf/defects4j_static_analysis_patches.json',
+                       default='dataset_test/SRepair/results/sf/defects4j_corrected_code_patches.json',
                        help='Output path for generated patches')
     parser.add_argument('--validate', '-v', action='store_true',
                        help='Run validation after generating patches')
@@ -601,7 +691,7 @@ def main():
     logger.info("All tasks completed!")
 
 if __name__ == "__main__":
-    # main() 
-    bug_name = "Jsoup-39"
-    bug_data = json.load(open("dataset_test/SRepair/SRepair/dataset/defects4j-sf.json", "r"))[bug_name]
-    selfdebug_java_single(bug_name, bug_data)
+    main() 
+    # bug_name = "Cli-8"
+    # bug_data = json.load(open("dataset_test/SRepair/SRepair/dataset/defects4j-sf.json", "r"))[bug_name]
+    # selfdebug_java_single(bug_name, bug_data)
