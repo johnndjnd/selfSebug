@@ -601,7 +601,7 @@ def main():
     logger.info("All tasks completed!")
 
 if __name__ == "__main__":
-    main() 
-    # bug_name = "Chart-1"
-    # bug_data = json.load(open("dataset_test/SRepair/SRepair/dataset/defects4j-sf.json", "r"))[bug_name]
-    # selfdebug_java_single(bug_name, bug_data)
+    # main() 
+    bug_name = "Jsoup-39"
+    bug_data = json.load(open("dataset_test/SRepair/SRepair/dataset/defects4j-sf.json", "r"))[bug_name]
+    selfdebug_java_single(bug_name, bug_data)

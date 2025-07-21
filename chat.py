@@ -10,7 +10,7 @@ from typing import List
 # 加载环境变量
 load_dotenv()
 
-GPT_MODEL = "openai/gpt-4o-mini"
+GPT_MODEL = "openai/gpt-3.5-turbo-1106"
 GPT_BASE_URL = "https://openrouter.ai/api/v1"
 GPT_API_KEY = os.getenv("GPT_API_KEY")
 DEEPSEEK_MODEL = "deepseek-chat"
@@ -513,7 +513,8 @@ Please return results in JSON format with the following fields:
         "trigger_condition": "Condition that triggers the error"
     }},  
     "corrected_code": "Complete corrected code",
-    "explanation": "Explanation of the fix principle"
+    "explanation": "Explanation of the fix principle",
+    "fix_method": "Method used to fix the bug"
 }}
 """
 
