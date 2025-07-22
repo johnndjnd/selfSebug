@@ -464,7 +464,7 @@ def monitor_validation_progress(output_dir: str, total_bugs: int, stop_event):
 
 def parse_validation_results(validation_output_dir: str) -> Dict:
     """
-    解析验证结果并统计修复正确率
+    解析验证结果并统计修复正确率，并按项目类型分类统计
     Args:
         validation_output_dir: 验证结果输出目录
     Returns:
@@ -484,11 +484,31 @@ def parse_validation_results(validation_output_dir: str) -> Dict:
     uncompilable_fixes = 0
     timeout_fixes = 0
     
+    # 按项目类型分类的结果
+    project_stats = {}
+    
     detailed_results = {}
     
     for val_file in validation_files:
         val_file_path = os.path.join(validation_output_dir, val_file)
         bug_name = val_file.replace('-validated.jsonl', '')
+        
+        # 提取项目类型（如Chart、Cli、Closure等）
+        project_type = None
+        if "-" in bug_name:
+            project_type = bug_name.split("-")[0]
+        
+        # 初始化项目类型的统计数据
+        if project_type and project_type not in project_stats:
+            project_stats[project_type] = {
+                'total': 0,
+                'plausible': 0,
+                'correct': 0,
+                'uncompilable': 0,
+                'timeout': 0,
+                'other': 0,
+                'bugs': []
+            }
         
         try:
             with open(val_file_path, 'r', encoding='utf-8') as f:
@@ -498,8 +518,14 @@ def parse_validation_results(validation_output_dir: str) -> Dict:
                 total_bugs += 1
                 status = patch_result.get('patch_status', 'UNKNOWN')
                 
+                # 更新项目类型统计
+                if project_type:
+                    project_stats[project_type]['total'] += 1
+                    project_stats[project_type]['bugs'].append(bug_name)
+                
                 detailed_results[f"{bug_name}_patch_{patch_result.get('val_cnt', 1)}"] = {
                     'bug_name': bug_name,
+                    'project_type': project_type,
                     'status': status,
                     'failing_tests': patch_result.get('failing_tests', {}),
                     'patch_code': patch_result.get('patch_code', '')[:100] + '...'  # 只保留前100字符
@@ -508,23 +534,49 @@ def parse_validation_results(validation_output_dir: str) -> Dict:
                 if status == 'PLAUSIBLE':
                     plausible_fixes += 1
                     correct_fixes += 1  # PLAUSIBLE 表示通过了所有测试
+                    if project_type:
+                        project_stats[project_type]['plausible'] += 1
+                        project_stats[project_type]['correct'] += 1
                 elif status == 'UNCOMPILABLE':
                     uncompilable_fixes += 1
+                    if project_type:
+                        project_stats[project_type]['uncompilable'] += 1
                 elif 'TIMEOUT' in status:
                     timeout_fixes += 1
+                    if project_type:
+                        project_stats[project_type]['timeout'] += 1
+                else:
+                    if project_type:
+                        project_stats[project_type]['other'] += 1
         
         except Exception as e:
             logger.error(f"Error parsing validation file {val_file}: {e}")
             continue
     
     # 计算统计结果
-    patch_generation_rate = 0
     plausible_rate = 0
     correct_rate = 0
     
     if total_bugs > 0:
         plausible_rate = (plausible_fixes / total_bugs) * 100
         correct_rate = (correct_fixes / total_bugs) * 100
+    
+    # 计算每个项目类型的修复率
+    for project, stats in project_stats.items():
+        if stats['total'] > 0:
+            stats['plausible_rate'] = round((stats['plausible'] / stats['total']) * 100, 2)
+            stats['correct_rate'] = round((stats['correct'] / stats['total']) * 100, 2)
+            # 移除重复的bug列表，只保留唯一值
+            stats['bugs'] = list(set(stats['bugs']))
+            stats['bug_count'] = len(stats['bugs'])
+    
+    # 按照项目修复率排序
+    sorted_projects = sorted(project_stats.items(), 
+                            key=lambda x: x[1]['correct_rate'] if x[1]['total'] > 0 else 0, 
+                            reverse=True)
+    
+    # 构建排序后的项目统计
+    sorted_project_stats = {k: v for k, v in sorted_projects}
     
     statistics = {
         'total_bugs_validated': total_bugs,
@@ -535,10 +587,11 @@ def parse_validation_results(validation_output_dir: str) -> Dict:
         'other_fixes': total_bugs - plausible_fixes - uncompilable_fixes - timeout_fixes,
         'plausible_rate': round(plausible_rate, 2),
         'correct_rate': round(correct_rate, 2),
+        'project_statistics': sorted_project_stats,
         'detailed_results': detailed_results
     }
     
-    # 打印统计结果
+    # 打印总体统计结果
     logger.info("=== DEFECTS4J REPAIR STATISTICS ===")
     logger.info(f"Total bugs validated: {total_bugs}")
     logger.info(f"Plausible fixes: {plausible_fixes}")
@@ -548,6 +601,17 @@ def parse_validation_results(validation_output_dir: str) -> Dict:
     logger.info(f"Other status fixes: {statistics['other_fixes']}")
     logger.info(f"Plausible rate: {plausible_rate:.2f}%")
     logger.info(f"Correct rate: {correct_rate:.2f}%")
+    
+    # 打印每个项目类型的统计结果
+    logger.info("\n=== PROJECT TYPE STATISTICS ===")
+    for project, stats in sorted_projects:
+        if stats['total'] > 0:
+            logger.info(f"Project {project}:")
+            logger.info(f"  Total bugs: {stats['bug_count']} (with {stats['total']} validation attempts)")
+            logger.info(f"  Plausible fixes: {stats['plausible']} ({stats['plausible_rate']}%)")
+            logger.info(f"  Correct fixes: {stats['correct']} ({stats['correct_rate']}%)")
+            logger.info(f"  Uncompilable: {stats['uncompilable']}, Timeout: {stats['timeout']}, Other: {stats['other']}")
+    
     logger.info("=" * 40)
     
     return statistics

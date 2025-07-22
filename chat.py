@@ -701,8 +701,8 @@ static Document parseByteData(ByteBuffer byteData, String charsetName, String ba
     '''
     
     user_prompt = f"""Analyze the following Java code to understand the execution flow of the code and generate a control flow graph (CFG).
-{f"Class name: {class_name}" if class_name else ""}
-{f"Method name: {method_name}" if method_name else ""}
+{f"Entry Class name: {class_name}" if class_name else ""}
+{f"Entry Method name: {method_name}" if method_name else ""}
 
 ```java
 {java_code}
