@@ -514,7 +514,8 @@ Please return results in JSON format with the following fields:
     }},  
     "corrected_code": "Complete corrected code",
     "explanation": "Explanation of the fix principle",
-    "fix_method": "Method used to fix the bug"
+    "fix_method": "Method used to fix the bug",
+    "code_change_summary": "Summary of the code changes"
 }}
 """
 
