@@ -10,7 +10,7 @@ from typing import List
 # 加载环境变量
 load_dotenv()
 
-GPT_MODEL = "openai/gpt-3.5-turbo-1106"
+GPT_MODEL = "openai/gpt-4o-mini"
 GPT_BASE_URL = "https://openrouter.ai/api/v1"
 GPT_API_KEY = os.getenv("GPT_API_KEY")
 DEEPSEEK_MODEL = "deepseek-chat"
@@ -521,7 +521,7 @@ Please return results in JSON format with the following fields:
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=GPT_MODEL,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
@@ -543,3 +543,205 @@ Please return results in JSON format with the following fields:
             "explanation": f"Automatic analysis failed: {str(e)}"
         }
         return json.dumps(error_response, ensure_ascii=False)
+
+
+def generate_java_cfg_with_llm(java_code: str, method_name: str = None, class_name: str = None) -> str:
+    """
+    使用LLM直接生成Java代码的控制流图
+    
+    Args:
+        java_code: Java源代码
+        method_name: 需要分析的方法名称（可选）
+        class_name: 需要分析的类名（可选）
+    
+    Returns:
+        控制流图的文本表示
+    """
+    
+    system_prompt = "You are an expert in program analysis, specialized in generating control flow graphs for Java code."
+    
+    # 添加few-shot示例，展示输出格式
+    example_code = '''
+    class TempClass {
+
+static Document parseByteData(ByteBuffer byteData, String charsetName, String baseUri, Parser parser) {
+    String docData;
+    Document doc = null;
+    if (charsetName == null) { 
+        docData = Charset.forName(defaultCharset).decode(byteData).toString();
+        doc = parser.parseInput(docData, baseUri);
+        Element meta = doc.select("meta[http-equiv=content-type], meta[charset]").first();
+        if (meta != null) { 
+            String foundCharset;
+            if (meta.hasAttr("http-equiv")) {
+                foundCharset = getCharsetFromContentType(meta.attr("content"));
+                if (foundCharset == null && meta.hasAttr("charset")) {
+                    try {
+                        if (Charset.isSupported(meta.attr("charset"))) {
+                            foundCharset = meta.attr("charset");
+                        }
+                    } catch (IllegalCharsetNameException e) {
+                        foundCharset = null;
+                    }
+                }
+            } else {
+                foundCharset = meta.attr("charset");
+            }
+
+            if (foundCharset != null && foundCharset.length() != 0 && !foundCharset.equals(defaultCharset)) { 
+                foundCharset = foundCharset.trim().replaceAll("[]", "");
+                charsetName = foundCharset;
+                byteData.rewind();
+                docData = Charset.forName(foundCharset).decode(byteData).toString();
+                doc = null;
+            }
+        }
+    } else { 
+        Validate.notEmpty(charsetName, "Must set charset arg to character set of file to parse. Set to null to attempt to detect from HTML");
+        docData = Charset.forName(charsetName).decode(byteData).toString();
+    }
+    if (docData.length() > 0 && docData.charAt(0) == 65279) {
+        byteData.rewind();
+        docData = Charset.forName(defaultCharset).decode(byteData).toString();
+        docData = docData.substring(1);
+        charsetName = defaultCharset;
+    }
+    if (doc == null) {
+        doc = parser.parseInput(docData, baseUri);
+        doc.outputSettings().charset(charsetName);
+    }
+    return doc;
+}
+
+}
+    '''
+    
+    example_output = '''
+    CFG text: G describes a control flow graph of Method `TempClass.parseByteData()`
+    In this graph:
+    Entry Point: Block 0 represents code snippet: String docData;.
+    END Block: Block 33 represents code snippet: END.
+    Block 0 represents code snippet: String docData;.
+    Block 1 represents code snippet: Document doc = null;.
+    Block 2 represents code snippet: if (charsetName == null) {.
+    Block 3 represents code snippet: docData = Charset.forName(defaultCharset).decode(byteData).toString();.
+    Block 4 represents code snippet: doc = parser.parseInput(docData, baseUri);.
+    Block 5 represents code snippet: Element meta = doc.select("meta[http-equiv=content-type], meta[charset]").first();.
+    Block 6 represents code snippet: if (meta != null) {.
+    Block 7 represents code snippet: String foundCharset;.
+    Block 8 represents code snippet: if (meta.hasAttr("http-equiv")) {.
+    Block 9 represents code snippet: foundCharset = getCharsetFromContentType(meta.attr("content"));.
+    Block 10 represents code snippet: if (foundCharset == null && meta.hasAttr("charset")) {.
+    Block 11 represents code snippet: if (Charset.isSupported(meta.attr("charset"))) {.
+    Block 12 represents code snippet: foundCharset = meta.attr("charset");.
+    Block 13 represents code snippet: } catch (IllegalCharsetNameException e) {.
+    Block 14 represents code snippet: foundCharset = null;.
+    Block 15 represents code snippet: foundCharset = meta.attr("charset");.
+    Block 16 represents code snippet: if (foundCharset != null && foundCharset.length() != 0 && !foundCharset.equals(defaultCharset)) {.
+    Block 17 represents code snippet: foundCharset = foundCharset.trim().replaceAll("[]", "");.
+    Block 18 represents code snippet: charsetName = foundCharset;.
+    Block 19 represents code snippet: byteData.rewind();.
+    Block 20 represents code snippet: docData = Charset.forName(foundCharset).decode(byteData).toString();.
+    Block 21 represents code snippet: doc = null;.
+    Block 22 represents code snippet: Validate.notEmpty(charsetName, "Must set charset arg to character set of file to parse. Set to null to attempt to detect from HTML");.
+    Block 23 represents code snippet: docData = Charset.forName(charsetName).decode(byteData).toString();.
+    Block 24 represents code snippet: if (docData.length() > 0 && docData.charAt(0) == 65279) {.
+    Block 25 represents code snippet: byteData.rewind();.
+    Block 26 represents code snippet: docData = Charset.forName(defaultCharset).decode(byteData).toString();.
+    Block 27 represents code snippet: docData = docData.substring(1);.
+    Block 28 represents code snippet: charsetName = defaultCharset;.
+    Block 29 represents code snippet: if (doc == null) {.
+    Block 30 represents code snippet: doc = parser.parseInput(docData, baseUri);.
+    Block 31 represents code snippet: doc.outputSettings().charset(charsetName);.
+    Block 32 represents code snippet: return doc;.
+    Block 33 represents code snippet: END.
+    Block 0 unconditional points to Block 1.
+    Block 1 unconditional points to Block 2.
+    Block 2 match case "charsetName == null" points to Block 3.
+    Block 2 not match case "charsetName == null" points to Block 22.
+    Block 3 unconditional points to Block 4.
+    Block 4 unconditional points to Block 5.
+    Block 5 unconditional points to Block 6.
+    Block 6 match case "meta != null" points to Block 7.
+    Block 6 not match case "meta != null" points to Block 24.
+    Block 7 unconditional points to Block 8.
+    Block 8 match case "meta.hasAttr("http-equiv")" points to Block 9.
+    Block 8 not match case "meta.hasAttr("http-equiv")" points to Block 15.
+    Block 9 unconditional points to Block 10.
+    Block 10 match case "foundCharset == null && meta.hasAttr("charset")" points to Block 11.
+    Block 10 not match case "foundCharset == null && meta.hasAttr("charset")" points to Block 16.
+    Block 11 match case "Charset.isSupported(meta.attr("charset"))" points to Block 12.
+    Block 11 exception points to Block 13.
+    Block 11 not match case "Charset.isSupported(meta.attr("charset"))" points to Block 16.
+    Block 12 exception points to Block 13.
+    Block 12 unconditional points to Block 16.
+    Block 13 unconditional points to Block 14.
+    Block 14 unconditional points to Block 16.
+    Block 15 unconditional points to Block 16.
+    Block 16 match case "foundCharset != null && foundCharset.length() != 0 && !foundCharset.equals(defaultCharset)" points to Block 17.
+    Block 16 not match case "foundCharset != null && foundCharset.length() != 0 && !foundCharset.equals(defaultCharset)" points to Block 24.
+    Block 17 unconditional points to Block 18.
+    Block 18 unconditional points to Block 19.
+    Block 19 unconditional points to Block 20.
+    Block 20 unconditional points to Block 21.
+    Block 21 unconditional points to Block 22.
+    Block 22 unconditional points to Block 23.
+    Block 23 unconditional points to Block 24.
+    Block 24 match case "docData.length() > 0 && docData.charAt(0) == 65279" points to Block 25.
+    Block 24 not match case "docData.length() > 0 && docData.charAt(0) == 65279" points to Block 29.
+    Block 25 unconditional points to Block 26.
+    Block 26 unconditional points to Block 27.
+    Block 27 unconditional points to Block 28.
+    Block 28 unconditional points to Block 29.
+    Block 29 match case "doc == null" points to Block 30.
+    Block 29 not match case "doc == null" points to Block 32.
+    Block 30 unconditional points to Block 31.
+    Block 31 unconditional points to Block 32.
+    Block 32 unconditional points to Block 33.
+    '''
+    
+    user_prompt = f"""Analyze the following Java code to understand the execution flow of the code and generate a control flow graph (CFG).
+{f"Class name: {class_name}" if class_name else ""}
+{f"Method name: {method_name}" if method_name else ""}
+
+```java
+{java_code}
+```
+
+Generate a control flow graph with the following format:
+1. Every block should be a meaningful atomic operation that can be executed, including declarations, assignments, conditional statements, and all statements that will lead to side effects.
+2. Some signs are meaningless but they are in a line by themselves, you should ignore them and not consider them as a block.
+3. Each block should be numbered starting from 0.
+4. Include connections between blocks with appropriate types.
+
+Here is an example of how to format the CFG output:
+
+Example Code:
+```java
+{example_code}
+```
+
+Example CFG Output:
+```
+{example_output}
+```
+
+Now generate the CFG for the provided code with the same format. If a specific method is specified, only generate the CFG for that method.
+"""
+    
+    try:
+        response = client.chat.completions.create(
+            model=GPT_MODEL,  # Use a capable model for program analysis
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.1,  # Low temperature for deterministic output
+            timeout=180.0,  # Give it time to analyze complex code
+        )
+        cfg_text = response.choices[0].message.content.strip()
+        logger.info(f"Generated Java CFG with LLM, output length: {len(cfg_text)} chars")
+        return cfg_text
+    except Exception as e:
+        logger.error(f"Failed to generate Java CFG with LLM: {str(e)}")
+        return f"Error generating CFG: {str(e)}"
