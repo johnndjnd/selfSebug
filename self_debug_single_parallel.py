@@ -278,7 +278,7 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
     
-    dataset_file = "data/humanevalfix/humanevalpack.jsonl"
+    dataset_file = "dataset_test/humanevalfix/humanevalpack.jsonl"
     max_workers = 8  # 进一步减少并发数
     task_timeout = 180  # 每个任务3分钟超时
     overall_timeout = 1800  # 总体30分钟超时

@@ -3,6 +3,7 @@ import ast
 import sys
 import json
 from loguru import logger
+from splitCode import ExpressionFlattener
 
 def extract_func_signature_from_code(func_name: str, code: str):
     """
@@ -28,6 +29,8 @@ def extract_func_signature_from_code(func_name: str, code: str):
 def extract_buggy_code(task_data_json: dict, filename: str = "buggy_code.py"):
     """将代码保存到当前目录，返回文件路径"""
     full_code = task_data_json['declaration'] + task_data_json['buggy_solution']
+    fl = ExpressionFlattener()
+    full_code = fl.flatten_code(full_code)
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(full_code)
     logger.info(f"bug代码已经整合并保存到{filename}")
@@ -56,4 +59,4 @@ def run_check_function(func_name: str, check_code: str, code_to_test: str):
         # 提供更详细的异常信息
         error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else f"{type(e).__name__} (无详细信息)"
         logger.error(f"⚠️ 执行错误: {error_msg}")
-        return False
+        return False 

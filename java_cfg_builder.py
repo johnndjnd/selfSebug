@@ -1949,25 +1949,25 @@ class JavaCFG:
     
     def print_features(self):
         """打印CFG特征信息"""
-        #logger.info("=================Improved Java Method CFG=================")
-        #logger.info(f"目标类: {self.target_class}")
-        #logger.info(f"目标方法: {self.target_method}")
-        #logger.info(f"方法签名: {self.method_signature}")
-        #logger.info(f"所有类: {list(self.all_classes.keys())}")
-        #logger.info(f"所有方法: {list(self.all_methods.keys())}")
-        #logger.info(f"块数量: {self.block_num}")
-        #logger.info(f"连接数量: {len(self.connections)}")
+        logger.info("=================Improved Java Method CFG=================")
+        logger.info(f"目标类: {self.target_class}")
+        logger.info(f"目标方法: {self.target_method}")
+        logger.info(f"方法签名: {self.method_signature}")
+        logger.info(f"所有类: {list(self.all_classes.keys())}")
+        logger.info(f"所有方法: {list(self.all_methods.keys())}")
+        logger.info(f"块数量: {self.block_num}")
+        logger.info(f"连接数量: {len(self.connections)}")
         
-        #logger.info("块信息:")
-        # for block in self.blocks: 
-            #logger.info(f"  Block {block['id']} ({block['type']}): {block['code'][:50]}...")
+        logger.info("块信息:")
+        for block in self.blocks: 
+            logger.info(f"  Block {block['id']} ({block['type']}): {block['code'][:50]}...")
         
-        #logger.info("连接信息:")
-        # for conn in self.connections:
-            #logger.info(f"  {conn['from']} --{conn['type']}--> {conn['to']}")
+        logger.info("连接信息:")
+        for conn in self.connections:
+            logger.info(f"  {conn['from']} --{conn['type']}--> {conn['to']}")
         
-        #logger.info(f"CFG文本表示:\n{self.cfg_text}")
-        #logger.info("=================Improved Java Method CFG=================")
+        logger.info(f"CFG文本表示:\n{self.cfg_text}")
+        logger.info("=================Improved Java Method CFG=================")
 
     def _find_next_top_level_statement_after_charset_null_block(self, if_block_id: int) -> Optional[int]:
         """为嵌套在charsetName == null内部的if语句找到跳出后的下一个顶级语句"""

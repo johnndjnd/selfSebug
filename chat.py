@@ -1,15 +1,26 @@
+import threading
 from openai import OpenAI
 from loguru import logger
 import time
-import re
 import json
 import os
 from dotenv import load_dotenv
 from typing import List
 
+
+import json
+import os
+import time
+from typing import Dict, List, Tuple, Optional
+from dataclasses import dataclass, field
+from datetime import datetime
+
+from loguru import logger
+
 # 加载环境变量
 load_dotenv()
 
+print_lock = threading.Lock()
 GPT_MODEL = "openai/gpt-4o-mini"
 GPT_BASE_URL = "https://openrouter.ai/api/v1"
 GPT_API_KEY = os.getenv("GPT_API_KEY")
@@ -18,8 +29,8 @@ DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
 client = OpenAI(
-    base_url=GPT_BASE_URL,
-    api_key=GPT_API_KEY,
+    base_url=DEEPSEEK_BASE_URL,
+    api_key=DEEPSEEK_API_KEY,
     timeout=180.0,  # 设置2分钟超时
 )
 
@@ -29,7 +40,73 @@ TEMPERATURE = 0.8
 TOTAL_PROMPT_TOKENS = 0
 TOTAL_COMPLETION_TOKENS = 0
 
-def get_completion_with_retry(messages, model=GPT_MODEL, MAX_VLLM_RETRIES=MAX_VLLM_RETRIES):
+@dataclass
+class AgentDebugResult:
+    """单个Agent的调试结果"""
+    agent_id: int
+    task_id: str
+    success: bool
+    corrected_code: str
+    reasoning: str
+    confidence_score: float
+    execution_time: float
+    test_cases_analyzed: List[str] = field(default_factory=list)
+    error_analysis: str = ""
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+
+@dataclass
+class DebateRound:
+    """一轮辩论的结果"""
+    round_number: int
+    agent_arguments: List[Dict[str, str]]  # agent_id -> argument
+    consensus_code: Optional[str] = None
+    disagreement_points: List[str] = field(default_factory=list)
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+
+@dataclass
+class TaskDebateHistory:
+    """任务的完整辩论历史"""
+    task_id: str
+    buggy_code: str
+    agent_results: List[AgentDebugResult] = field(default_factory=list)
+    debate_rounds: List[DebateRound] = field(default_factory=list)
+    final_code: Optional[str] = None
+    final_test_passed: Optional[bool] = None
+    total_time: float = 0.0
+    
+    def to_dict(self) -> dict:
+        """转换为可序列化的字典"""
+        return {
+            'task_id': self.task_id,
+            'buggy_code': self.buggy_code,
+            'agent_results': [
+                {
+                    'agent_id': r.agent_id,
+                    'success': r.success,
+                    'corrected_code': r.corrected_code,
+                    'reasoning': r.reasoning,
+                    'confidence_score': r.confidence_score,
+                    'execution_time': r.execution_time,
+                    'test_cases_analyzed': r.test_cases_analyzed,
+                    'error_analysis': r.error_analysis,
+                    'timestamp': r.timestamp
+                } for r in self.agent_results
+            ],
+            'debate_rounds': [
+                {
+                    'round_number': d.round_number,
+                    'agent_arguments': d.agent_arguments,
+                    'consensus_code': d.consensus_code,
+                    'disagreement_points': d.disagreement_points,
+                    'timestamp': d.timestamp
+                } for d in self.debate_rounds
+            ],
+            'final_code': self.final_code,
+            'final_test_passed': self.final_test_passed,
+            'total_time': self.total_time
+        }
+
+def get_completion_with_retry(messages, model=DEEPSEEK_MODEL, MAX_VLLM_RETRIES=MAX_VLLM_RETRIES):
     global TOTAL_PROMPT_TOKENS, TOTAL_COMPLETION_TOKENS
     for attempt in range(MAX_VLLM_RETRIES):
         try:
@@ -110,7 +187,7 @@ def get_completion_with_retry(messages, model=GPT_MODEL, MAX_VLLM_RETRIES=MAX_VL
                 logger.error("Max retries reached. Giving up.")
                 raise Exception(f"All {MAX_VLLM_RETRIES} attempts failed. Last error: {error_msg}")
 
-def direct_fix_code(task_description: str, test_case: str, buggy_code: str) -> str:
+def direct_fix_code(task_description: str, test_case: str, buggy_code: str,recheckDetails = "") -> str:
     """
     直接调用大模型修复代码的函数
     Args:
@@ -134,6 +211,8 @@ def direct_fix_code(task_description: str, test_case: str, buggy_code: str) -> s
     ```python
     {buggy_code}
     ```
+
+    {f"### In your previous Fix Attempt Details\n{recheckDetails}" if recheckDetails else ""}
 
     ### Requirements
     1. Analyze the buggy code carefully and identify the issues
@@ -181,6 +260,70 @@ def direct_fix_code(task_description: str, test_case: str, buggy_code: str) -> s
     except Exception as e:
         logger.error(f"direct_fix_code出错: {e}")
         return buggy_code
+    
+
+def ai_critic_word(task_description: str, test_case: str, fixed_code: str, run_details: str = "") -> tuple:
+    """
+    使用另一个智能体来评审修复后的代码
+    """
+    prompt = f"""
+    I will provide you with a task description, a test case, and a piece of Python code that has been fixed.
+    Your job is to evaluate whether the fixed code correctly addresses the task and passes the test case.
+    ### Task Description
+    {task_description}
+    ### Test Case
+    {test_case}
+    ### Fixed Code
+    ```python
+    {fixed_code}
+    ```
+
+    {f"### In your previous Fix Attempt Details\n{run_details}" if run_details else ""}
+
+    ### Evaluation Criteria
+    1. Analyze the fixed code to see if it meets the task description
+    2. Determine if the fixed code would pass the provided test case
+    Please respond with a JSON object in the following format:
+    ### Test Case
+    {test_case}
+    ### Fixed Code
+    ```python
+    {fixed_code}
+    ```
+    ### Evaluation Criteria
+    1. Analyze the fixed code to see if it meets the task description
+    2. Determine if the fixed code would pass the provided test case
+    Please respond with a JSON object in the following format:
+    {{"is_passed": true/false, "reason": "if not passed, provide reasons as detailed as possible"}}
+    """
+
+    messages = [
+        {'role': 'system', 'content': "You are an expert Python programmer specialized in code review and critique."},
+        {'role': 'user', 'content': prompt},
+    ]
+
+    try:
+        response = get_completion_with_retry(messages)
+        logger.info(f"ai_critic_word response: {response}")
+        
+        # 解析JSON响应
+        try:
+            data = json.loads(response)
+            is_passed = data.get("is_passed", False)
+            reason = data.get("reason", "")
+            return is_passed,reason
+        except json.JSONDecodeError as e:
+            logger.error("="*50)
+            logger.error("ai_critic_word中JSON解析失败！详细信息如下：")
+            logger.error(f"JSON错误详情: {str(e)}")
+            logger.error(f"响应总长度: {len(response) if response else 0} 字符")
+            logger.error(f"响应内容前500字符: {response[:500] if response else 'None'}...")
+            logger.error(f"响应内容后100字符: {response[-100:] if response and len(response) > 100 else 'N/A'}...")
+            logger.error("="*50)
+            return False,""
+    except Exception as e:
+        logger.error(f"ai_critic_word出错: {e}")
+        return False,""
 
 # - You MUST obey the following loop handling rules to reduce the output length:
 # **LOOP HANDLING RULES (CRITICAL FOR REDUCING OUTPUT):**
@@ -238,51 +381,81 @@ def chat_merge_debug_results(buggy_code: str, individual_results: List[str], tas
 **Proposed Fix:** 
 ```python
 {result.get('corrected_code', 'No code')}
-```
-**Explanation:** {result.get('explanation', 'No explanation')}
+Explanation: {result.get('explanation', 'No explanation')}
 
 """
 
     prompt = f"""
-You are an expert Python programmer. You have received multiple individual analyses of a buggy function, each focused on a specific test case. Your task is to synthesize all these analyses and provide a single, comprehensive corrected version that fixes all identified issues.
+You are an expert Python programmer and tester. You have received multiple individual analyses of a buggy function, each focused on a specific test case. Your task is to test each proposed correction, evaluate the results, and select the optimal solution.
 
-### Task Description
+Task Description
 {task_description}
 
-### Original Buggy Code
-```python
+Original Buggy Code
+python
 {buggy_code}
-```
-
-### Individual Test Case Analyses
+Individual Test Case Analyses
 {individual_analyses}
 
-### Synthesis Instructions
+Testing and Evaluation Instructions
+Simulate Test Execution: For each proposed corrected code, simulate running it against ALL test cases mentioned in the analyses
 
-1. **Review all analyses**: Examine each individual analysis and proposed fix
-2. **Identify common patterns**: Look for consistent issues across multiple test cases
-3. **Resolve conflicts**: If different analyses suggest different fixes, determine the best approach
-4. **Create unified solution**: Develop a single corrected version that addresses all identified issues
-5. **Ensure completeness**: Make sure the final solution works for all test cases mentioned
+Record Test Results: Track which test cases pass or fail for each correction
 
-### JSON Output Format
+Evaluate Code Quality: Assess the readability, efficiency, and robustness of each solution
+
+Select Optimal Solution: Choose the correction that passes the most tests and has the best code quality
+
+Synthesize Improvements: Incorporate the best elements from multiple solutions if needed
+
+Test Simulation Format
+For each corrected code version, simulate:
+
+python
+# Test Case 1: [description]
+result = corrected_function(test_input_1)
+expected = expected_output_1
+# Result: PASS/FAIL
+
+# Test Case 2: [description]
+result = corrected_function(test_input_2)
+expected = expected_output_2
+# Result: PASS/FAIL
+JSON Output Format
 Please output strictly in the following JSON format:
 {{
-    "synthesis_analysis": "Analysis of how you combined the individual results",
-    "common_issues": "List of issues that appeared across multiple test cases",
-    "resolution_strategy": "How you resolved any conflicting suggestions",
-    "final_corrected_code": "Complete final corrected code with proper imports",
-    "comprehensive_explanation": "Detailed explanation of all changes made and why"
+"test_results_analysis": "Summary of test results for all proposed corrections",
+"best_correction_index": "Index of the correction that performed best in testing",
+"test_case_comparison": {{
+"test_case_1": {{
+"test_case_content": "content of test case 1",
+"tests_passed": ["correction_1", "correction_3"],
+"tests_failed": ["correction_2"],
+}},
+"test_case_2": {{
+"test_case_content": "content of test case 2",
+"tests_passed": ["correction_2"],
+"tests_failed": ["correction_1", "correction_3"],
+}}
+}},
+"synthesis_analysis": "Analysis of how you combined the best elements from multiple corrections",
+"common_issues": "List of issues that appeared across multiple test cases",
+"final_corrected_code": "Complete final corrected code with proper imports",
+"comprehensive_explanation": "Detailed explanation of selection process and all changes made"
 }}
 
-### Quality Requirements
-1. **Comprehensive**: Address all issues found in individual analyses
-2. **Consistent**: Ensure the solution works for all test cases
-3. **Clean**: Provide well-structured, readable code
-4. **Complete**: Include all necessary imports and maintain function signature
-5. **Accurate**: Ensure the final code correctly implements the task requirements
+Quality Requirements
+Rigorous Testing: Test each correction against all mentioned test cases
 
-Begin your synthesis now.
+Objective Evaluation: Use test results as primary selection criteria
+
+Code Quality: Consider readability, efficiency, and maintainability
+
+Completeness: Ensure final solution addresses all identified issues
+
+Transparency: Clearly document the testing process and selection rationale
+
+Begin your testing and synthesis now.
 """
 
     messages = [
@@ -325,13 +498,14 @@ def chat_selfdebug(buggy_code: str, example_test: str, task_description: str, te
     prompt = f"""
 You are an expert Python programmer and debugger. Your task is to systematically analyze buggy code using detailed Chain-of-Thought reasoning and provide a corrected version.
 
-### Task Description
-{task_description}
 
-### Buggy Code
+### Buggy Code :do not care the function name
 ```python
 {buggy_code}
 ```
+
+### Task Description
+{task_description}
 
 ### Control Flow Graph (CFG)
 {text_cfg if text_cfg else "No CFG provided"}
@@ -403,7 +577,12 @@ Please output strictly in the following JSON format:
         "bug_classification": "Bug classification",
         "fix_strategy": "Overall fix strategy"
     }},
-    "corrected_code": "Complete corrected code",
+    "correctedCode_test_analysis": {{
+        "corrected_code": "Final corrected code after considering all test cases",
+        "test_case_consideration": "Explanation of how the corrected code addresses each test case",
+        "has_passed_all_tests": true/false
+    }},
+    
     "explanation": "Detailed explanation of the changes made"
 }}
 
@@ -469,6 +648,152 @@ IMPORTANT: Keep your total response under token limit to avoid truncation. If th
             "error": str(e)
         }
         return json.dumps(error_response, indent=2, ensure_ascii=False)
+    
+def safe_print(message: str):
+    """线程安全的打印函数"""
+    with print_lock:
+        print(f"[{time.strftime('%H:%M:%S')}] {message}")
+    
+def conduct_debate(agent_results: List[AgentDebugResult], 
+                   task_description: str,
+                   test_cases: List[str],
+                   buggy_code: str,
+                   max_rounds: int = 3) -> Tuple[str, List[DebateRound]]:
+    """
+    组织多个Agent进行辩论,达成共识
+    Args:
+        agent_results: 各个Agent的初始调试结果
+        task_description: 任务描述
+        test_cases: 测试用例
+        buggy_code: 原始错误代码
+        max_rounds: 最大辩论轮数
+    Returns:
+        (最终代码, 辩论历史)
+    """
+    debate_rounds = []
+    
+    # 过滤出成功的Agent结果
+    successful_agents = [r for r in agent_results if r.success]
+    
+    if not successful_agents:
+        safe_print("[Debate] No successful agent results to debate")
+        return buggy_code, debate_rounds
+    
+    if len(successful_agents) == 1:
+        safe_print("[Debate] Only one successful agent, no debate needed")
+        return successful_agents[0].corrected_code, debate_rounds
+    
+    safe_print(f"[Debate] Starting debate with {len(successful_agents)} agents for {max_rounds} rounds")
+    
+    current_proposals = {r.agent_id: r.corrected_code for r in successful_agents}
+    
+    for round_num in range(1, max_rounds + 1):
+        safe_print(f"[Debate] Round {round_num}/{max_rounds}")
+        
+        # 准备辩论提示
+        proposals_text = ""
+        for agent_result in successful_agents:
+            proposals_text += f"""
+### Agent {agent_result.agent_id} Proposal (Confidence: {agent_result.confidence_score:.2f})
+**Reasoning:** {agent_result.reasoning}
+**Code:**
+```python
+{agent_result.corrected_code}
+```
+"""
+        
+        debate_prompt = f"""
+You are participating in a multi-agent debate to determine the best fix for a buggy Python function.
+
+### Task Description
+{task_description}
+
+### Original Buggy Code
+```python
+{buggy_code}
+```
+
+### Test Cases
+{chr(10).join(test_cases)}
+
+### Current Proposals from {len(successful_agents)} Agents
+{proposals_text}
+
+### Your Task
+1. Analyze all proposals and identify:
+   - Common fixes across proposals
+   - Conflicting approaches
+   - Potential issues in each proposal
+2. Provide constructive criticism for each proposal
+3. Suggest a consensus solution that combines the best aspects
+
+### JSON Output Format
+{{
+    "analysis": {{
+        "common_fixes": "What fixes appear in multiple proposals",
+        "conflicts": "Where proposals differ significantly",
+        "strengths": {{"agent_id": "strength"}},
+        "weaknesses": {{"agent_id": "weakness"}}
+    }},
+    "consensus_code": "The best combined solution",
+    "explanation": "Why this consensus is better than individual proposals"
+}}
+"""
+                
+        try:
+            messages = [
+                {'role': 'system', 'content': 'You are an expert code reviewer facilitating a multi-agent debate.'},
+                {'role': 'user', 'content': debate_prompt}
+            ]
+            
+            response = get_completion_with_retry(messages)
+            debate_result = json.loads(response)
+            
+            consensus_code = debate_result.get("consensus_code", "")
+            analysis = debate_result.get("analysis", {})
+            
+            # 记录本轮辩论
+            agent_arguments = []
+            for agent_result in successful_agents:
+                agent_arguments.append({
+                    'agent_id': agent_result.agent_id,
+                    'proposal': agent_result.corrected_code,
+                    'reasoning': agent_result.reasoning,
+                    'confidence': agent_result.confidence_score
+                })
+            
+            debate_round = DebateRound(
+                round_number=round_num,
+                agent_arguments=agent_arguments,
+                consensus_code=consensus_code,
+                disagreement_points=analysis.get("conflicts", "").split('\n') if analysis.get("conflicts") else []
+            )
+            
+            debate_rounds.append(debate_round)
+            
+            safe_print(f"[Debate] Round {round_num} completed, consensus reached")
+            
+            # 如果达成高度共识,提前结束
+            if len(analysis.get("conflicts", "")) < 50:  # 冲突描述很短
+                safe_print(f"[Debate] High consensus achieved, ending debate early")
+                return consensus_code, debate_rounds
+            
+            # 更新proposals为当前共识
+            current_proposals = {0: consensus_code}
+            
+        except Exception as e:
+            safe_print(f"[Debate] Round {round_num} error: {str(e)[:100]}")
+            # 如果辩论失败,返回置信度最高的Agent结果
+            best_agent = max(successful_agents, key=lambda x: x.confidence_score)
+            return best_agent.corrected_code, debate_rounds
+    
+    # 所有轮次结束,返回最后的共识
+    if debate_rounds and debate_rounds[-1].consensus_code:
+        return debate_rounds[-1].consensus_code, debate_rounds
+    else:
+        # 回退到最佳Agent结果
+        best_agent = max(successful_agents, key=lambda x: x.confidence_score)
+        return best_agent.corrected_code, debate_rounds
 
 def chat_java_fragment_debug(buggy_code: str, error_message: str, test_case: str, cfg_text: str = "") -> str:
     """
@@ -521,7 +846,7 @@ Please return results in JSON format with the following fields:
 
     try:
         response = client.chat.completions.create(
-            model=GPT_MODEL,
+            model=DEEPSEEK_MODEL,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
@@ -731,7 +1056,7 @@ Now generate the CFG for the provided code with the same format. If a specific m
     
     try:
         response = client.chat.completions.create(
-            model=GPT_MODEL,  # Use a capable model for program analysis
+            model=DEEPSEEK_MODEL,  # Use a capable model for program analysis
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}

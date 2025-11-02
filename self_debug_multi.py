@@ -2,7 +2,7 @@ import json
 import re
 from complete_cfg_builder import TextCFG
 from utils import extract_buggy_code
-from chat import chat_selfdebug, chat_merge_debug_results
+from chat import chat_selfdebug, chat_merge_debug_results,ai_critic_word
 from loguru import logger
 from typing import List
 
@@ -124,21 +124,27 @@ def selfdebug_multi(task_id: int = 5):
         }
         
         individual_results = [json.dumps(basic_debug_result, ensure_ascii=False)]
-        
+        lastDetails = ""
         try:
-            final_corrected_code = chat_merge_debug_results(
-                buggy_code=buggy_code,
-                individual_results=individual_results,
-                task_description=task_description
-            )
+            for i in range(3):
+                buggy_code = chat_merge_debug_results(
+                    buggy_code=buggy_code,
+                    individual_results=individual_results,
+                    task_description=task_description+ lastDetails
+                )
+                isPassed,runDetails= ai_critic_word(task_description, "No test cases available", buggy_code)
+                if not isPassed:
+                    lastDetails= f"\n### Previous Fix Attempt Details\n{runDetails}"
+                else:                
+                    break
             
             logger.info("=== 直接调试完成 ===")
             logger.info("最终修正代码：")
             logger.info("="*50)
-            logger.info(final_corrected_code)
+            logger.info(buggy_code)
             logger.info("="*50)
             
-            return final_corrected_code
+            return buggy_code
             
         except Exception as e:
             logger.error(f"直接调试失败: {e}")
@@ -152,52 +158,59 @@ def selfdebug_multi(task_id: int = 5):
     for i, test_case in enumerate(test_cases, 1):
         logger.info(f"=== 调试测试用例 {i}/{len(test_cases)} ===")
         logger.info(f"测试用例内容：\n{test_case}")
-        
+        details = ""
         try:
             # 直接调用chat_selfdebug
-            full_debug_result = chat_selfdebug(
-                buggy_code=buggy_code,
-                example_test=test_case,
-                task_description=task_description,
-                text_cfg=cfg_text
-            )
-            
-            # 从chat_selfdebug的输出中提取需要的信息
-            try:
-                full_debug_json = json.loads(full_debug_result)
-                corrected_code = full_debug_json.get("corrected_code", buggy_code)
-                explanation = full_debug_json.get("explanation", "No explanation provided")
+            for i in range(3):
+                full_debug_result = chat_selfdebug(
+                    buggy_code=buggy_code,
+                    example_test=test_case,
+                    task_description=task_description+details,
+                    text_cfg=cfg_text
+                )
+                isPassed,runDetails= ai_critic_word(task_description, test_case, buggy_code)
+                if not isPassed:
+                    logger.info(f"测试用例 {i} 调试后仍未通过，继续调试...")
+                    details= f"\n### Previous Fix Attempt Details\n{runDetails}"
+                    continue
+                # 从chat_selfdebug的输出中提取需要的信息
+                try:
+                    full_debug_json = json.loads(full_debug_result)
+                    buggy_code = full_debug_json.get("corrected_code", buggy_code)
+                    explanation = full_debug_json.get("explanation", "No explanation provided")
+                    
+                    # 提取第一个测试用例的分析信息（如果存在）
+                    overall_analysis = full_debug_json.get("overall_analysis", {})
+                    
+                    # 构建简化的结果格式（保持与原来兼容）
+                    simplified_result = {
+                        "test_case": test_case.strip(),
+                        "bug_analysis": overall_analysis.get("common_patterns", "Analysis from chat_selfdebug"),
+                        "corrected_code": buggy_code,
+                        "explanation": explanation
+                    }
+
+
+                    
+                    result = json.dumps(simplified_result, ensure_ascii=False)
+                    individual_results.append(result)
+                    logger.info(f"测试用例 {i} 调试完成")
+                    
+                    # 打印结果摘要
+                    logger.info(f"  Bug分析: {simplified_result.get('bug_analysis', 'N/A')[:100]}...")
+                    logger.info(f"  修正说明: {simplified_result.get('explanation', 'N/A')[:100]}...")
                 
-                # 提取第一个测试用例的分析信息（如果存在）
-                overall_analysis = full_debug_json.get("overall_analysis", {})
-                
-                # 构建简化的结果格式（保持与原来兼容）
-                simplified_result = {
-                    "test_case": test_case.strip(),
-                    "bug_analysis": overall_analysis.get("common_patterns", "Analysis from chat_selfdebug"),
-                    "corrected_code": corrected_code,
-                    "explanation": explanation
-                }
-                
-                result = json.dumps(simplified_result, ensure_ascii=False)
-                individual_results.append(result)
-                logger.info(f"测试用例 {i} 调试完成")
-                
-                # 打印结果摘要
-                logger.info(f"  Bug分析: {simplified_result.get('bug_analysis', 'N/A')[:100]}...")
-                logger.info(f"  修正说明: {simplified_result.get('explanation', 'N/A')[:100]}...")
-                
-            except json.JSONDecodeError as e:
-                logger.warning(f"测试用例 {i} 的chat_selfdebug结果JSON格式有误: {e}")
-                # 创建一个简单的结果
-                simplified_result = {
-                    "test_case": test_case.strip(),
-                    "bug_analysis": "JSON parsing failed for chat_selfdebug result",
-                    "corrected_code": buggy_code,
-                    "explanation": f"Failed to parse chat_selfdebug result: {str(e)}"
-                }
-                result = json.dumps(simplified_result, ensure_ascii=False)
-                individual_results.append(result)
+                except json.JSONDecodeError as e:
+                    logger.warning(f"测试用例 {i} 的chat_selfdebug结果JSON格式有误: {e}")
+                    # 创建一个简单的结果
+                    simplified_result = {
+                        "test_case": test_case.strip(),
+                        "bug_analysis": "JSON parsing failed for chat_selfdebug result",
+                        "corrected_code": buggy_code,
+                        "explanation": f"Failed to parse chat_selfdebug result: {str(e)}"
+                    }
+                    result = json.dumps(simplified_result, ensure_ascii=False)
+                    individual_results.append(result)
                 
         except Exception as e:
             logger.error(f"测试用例 {i} 调试失败: {e}")
@@ -241,4 +254,6 @@ def selfdebug_multi(task_id: int = 5):
         return buggy_code
 
 if __name__ == "__main__":
-    selfdebug_multi(5)
+    selfdebug_multi(54)
+
+    

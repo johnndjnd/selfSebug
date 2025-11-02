@@ -15,7 +15,7 @@ import threading
 
 from complete_cfg_builder import TextCFG
 from utils import extract_buggy_code, run_check_function, write_str_to_file
-from chat import chat_selfdebug, chat_merge_debug_results
+from chat import ai_critic_word, chat_selfdebug, chat_merge_debug_results
 from loguru import logger
 
 # 线程锁用于保证输出和文件写入的线程安全
@@ -125,7 +125,9 @@ test_{func_name}()
     
     return individual_tests
 
-def process_single_task_multi(task_data: dict, task_index: int, timeout: int = 300) -> Tuple[str, bool, Optional[bool], str, str, bool]:
+
+
+def process_single_task_multi(task_data: dict, task_index: int, timeout: int = 3002) -> Tuple[str, bool, Optional[bool], str, str, bool]:
     """
     使用多轮调试方法处理单个任务
     返回: (task_id, debug_success, test_passed, error_type, details, has_test_cases)
@@ -208,13 +210,20 @@ def process_single_task_multi(task_data: dict, task_index: int, timeout: int = 3
             }
             
             individual_results = [json.dumps(basic_debug_result, ensure_ascii=False)]
-            
+            lastDetails = ""
             try:
-                final_corrected_code = chat_merge_debug_results(
-                    buggy_code=buggy_code,
-                    individual_results=individual_results,
-                    task_description=task_description
-                )
+                for i in range(3):
+                    buggy_code = chat_merge_debug_results(
+                        buggy_code=buggy_code,
+                        individual_results=individual_results,
+                        task_description=task_description+ lastDetails
+                    )
+                    isPassed,runDetails= ai_critic_word(task_description, "No test cases available", buggy_code)
+                    if not isPassed:
+                        lastDetails= f"\n### Previous Fix Attempt Details\n{runDetails}"
+                    else:                
+                        break
+                    
                 safe_print(f"[{task_index}] Direct merge debug completed for {task_id}")
             except Exception as e:
                 safe_print(f"[{task_index}] Direct merge debug failed for {task_id}: {str(e)[:100]}...")
@@ -233,20 +242,28 @@ def process_single_task_multi(task_data: dict, task_index: int, timeout: int = 3
                 if elapsed_time > timeout - 120:  # 留2分钟给合并
                     safe_print(f"[{task_index}] Timeout approaching during test case {i}/{len(test_cases)} for {task_id}")
                     break
-                
+                details = ""
                 try:
                     safe_print(f"[{task_index}] Debugging test case {i}/{len(test_cases)} for {task_id}")
                     
-                    full_debug_result = chat_selfdebug(
-                        buggy_code=buggy_code,
-                        example_test=test_case,
-                        task_description=task_description,
-                        text_cfg=cfg_text
-                    )
-                    
+                    for i in range(3):
+                        buggy_code = chat_selfdebug(
+                            buggy_code=buggy_code,
+                            example_test=test_case,
+                            task_description=task_description+details,
+                            text_cfg=cfg_text
+                        )
+                        isPassed,runDetails= ai_critic_word(task_description, test_case, buggy_code)
+                        if not isPassed:
+                            logger.info(f"测试用例 {i} 调试后仍未通过，继续调试...")
+                            details= f"\n### Previous Fix Attempt Details\n{runDetails}"
+                            continue
+                        else:
+                            break
+
                     # 解析结果
                     try:
-                        full_debug_json = json.loads(full_debug_result)
+                        full_debug_json = json.loads(buggy_code)
                         corrected_code = full_debug_json.get("corrected_code", buggy_code)
                         explanation = full_debug_json.get("explanation", "No explanation provided")
                         overall_analysis = full_debug_json.get("overall_analysis", {})
@@ -390,7 +407,7 @@ def main():
     
     dataset_file = "dataset_test/humanevalfix/humanevalpack.jsonl"
     max_workers = 8  # 适中的并发数，考虑到多轮调试的复杂性
-    task_timeout = 300  # 每个任务5分钟超时（多轮调试需要更多时间）
+    task_timeout = 3000  # 每个任务5分钟超时（多轮调试需要更多时间）
     overall_timeout = 3600  # 总体60分钟超时
     task_limit = None  # 限制处理任务数，用于测试
     

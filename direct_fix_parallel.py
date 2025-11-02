@@ -12,7 +12,7 @@ from loguru import logger
 from pathlib import Path
 from typing import Dict, Any, Tuple
 from tqdm import tqdm
-from chat import direct_fix_code
+from chat import direct_fix_code,ai_critic_word
 from utils import extract_buggy_code, run_check_function
 
 def setup_logger_for_process(process_id: int):
@@ -29,6 +29,8 @@ def direct_fix_single_task(task_data: Tuple[int, str]) -> Tuple[int, bool, str]:
         (task_index, is_success, error_message)
     """
     task_idx, line = task_data
+    # if task_idx != 54 and task_idx != 163:
+    #     return task_idx, False, "跳过非54和163任务"
     process_id = os.getpid()
     
     # 为当前进程设置日志
@@ -55,13 +57,23 @@ def direct_fix_single_task(task_data: Tuple[int, str]) -> Tuple[int, bool, str]:
         
         # 直接调用大模型修复代码
         logger.info("开始调用大模型修复代码...")
-        fixed_code = direct_fix_code(task_description, example_test, buggy_code)
-        logger.info(f"修复后的代码:\n{fixed_code}")
+        recheckDetails = ""
+        for i in range(3):
+            buggy_code = direct_fix_code(task_description, example_test, buggy_code,recheckDetails)
+            is_success = run_check_function(function_name, example_test, buggy_code)
+            # if is_success:
+            #     break
+            ispassed,recheckDetails= ai_critic_word(task_description, example_test, buggy_code)
+            if ispassed:
+                break
+
+        
+        logger.info(f"修复后的代码:\n{buggy_code}")
         
         # 使用隐藏测试用例验证修复结果
         hidden_check_test = task['test']
         logger.info("开始验证修复结果...")
-        is_success = run_check_function(function_name, hidden_check_test, fixed_code)
+        is_success = run_check_function(function_name, hidden_check_test, buggy_code)
         
         # 清理临时文件
         try:
@@ -196,7 +208,7 @@ if __name__ == "__main__":
     # 设置主进程日志
     logger.add("direct_fix_main.txt", encoding="utf-8", rotation="10 MB", retention="10 days")
     
-    dataset_path = "./data/humanevalfix/humanevalpack.jsonl"
+    dataset_path = "./dataset_test/humanevalfix/humanevalpack.jsonl"
     
     # 检查数据集是否存在
     if not os.path.exists(dataset_path):

@@ -1,0 +1,158 @@
+2025-10-21 14:18:47.711 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-21 14:18:47.712 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-21 14:18:47.713 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-21 14:20:01.410 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:15:23.461 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:15:23.757 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:15:23.758 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:16:38.680 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:25:34.694 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:25:34.989 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:25:34.990 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:26:58.123 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:28:28.010 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:28:28.328 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:28:28.330 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:29:38.269 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:32:20.517 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:32:20.521 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:32:20.521 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:33:32.001 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:33:52.996 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:33:52.999 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:33:53.000 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:35:14.087 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:37:33.366 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:37:33.368 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:37:33.368 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:38:59.845 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:41:13.420 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:41:13.423 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:41:13.423 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:42:37.077 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:43:03.142 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:43:03.145 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:43:03.145 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:44:30.800 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:48:12.754 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:48:12.757 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:48:12.757 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:49:35.188 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 22:49:53.738 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 22:49:53.741 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 22:49:53.741 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 22:51:14.993 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 23:42:50.402 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-10-22 23:42:50.405 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-10-22 23:42:50.405 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-10-22 23:48:05.627 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-22 23:48:05.629 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-22 23:48:05.630 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-22 23:50:20.224 | INFO     | __main__:direct_fix_all_tasks_parallel:184 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 23:50:47.639 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-22 23:50:47.642 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-22 23:50:47.642 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-22 23:53:34.650 | INFO     | __main__:direct_fix_all_tasks_parallel:184 - 详细结果已保存到 direct_fix_results.json
+2025-10-22 23:53:45.939 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-22 23:53:45.942 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-22 23:53:45.942 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-23 00:06:04.399 | INFO     | __main__:direct_fix_all_tasks_parallel:184 - 详细结果已保存到 direct_fix_results.json
+2025-10-23 00:06:51.123 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-23 00:06:51.125 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-23 00:06:51.126 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-23 00:07:40.216 | INFO     | __main__:direct_fix_all_tasks_parallel:184 - 详细结果已保存到 direct_fix_results.json
+2025-10-23 00:20:58.536 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-23 00:20:58.538 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-23 00:20:58.538 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-23 00:36:16.967 | INFO     | __main__:<module>:211 - 开始完整并行测试，使用 16 个进程
+2025-10-23 00:36:16.973 | INFO     | __main__:direct_fix_all_tasks_parallel:106 - 总任务数: 164
+2025-10-23 00:36:16.974 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 使用 16 个并行进程
+2025-10-23 00:37:51.756 | INFO     | __main__:direct_fix_all_tasks_parallel:184 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:29:42.356 | INFO     | __main__:<module>:217 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:29:42.364 | INFO     | __main__:direct_fix_all_tasks_parallel:112 - 总任务数: 164
+2025-10-25 13:29:42.365 | INFO     | __main__:direct_fix_all_tasks_parallel:121 - 使用 16 个并行进程
+2025-10-25 13:30:30.943 | INFO     | __main__:direct_fix_all_tasks_parallel:190 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:31:15.902 | INFO     | __main__:<module>:217 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:31:15.908 | INFO     | __main__:direct_fix_all_tasks_parallel:112 - 总任务数: 164
+2025-10-25 13:31:15.908 | INFO     | __main__:direct_fix_all_tasks_parallel:121 - 使用 16 个并行进程
+2025-10-25 13:32:07.939 | INFO     | __main__:direct_fix_all_tasks_parallel:190 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:33:59.840 | INFO     | __main__:<module>:217 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:33:59.846 | INFO     | __main__:direct_fix_all_tasks_parallel:112 - 总任务数: 164
+2025-10-25 13:33:59.846 | INFO     | __main__:direct_fix_all_tasks_parallel:121 - 使用 16 个并行进程
+2025-10-25 13:35:19.894 | INFO     | __main__:direct_fix_all_tasks_parallel:190 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:36:00.646 | INFO     | __main__:<module>:217 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:36:00.651 | INFO     | __main__:direct_fix_all_tasks_parallel:112 - 总任务数: 164
+2025-10-25 13:36:00.651 | INFO     | __main__:direct_fix_all_tasks_parallel:121 - 使用 16 个并行进程
+2025-10-25 13:42:14.472 | INFO     | __main__:direct_fix_all_tasks_parallel:190 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:42:34.004 | INFO     | __main__:<module>:217 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:42:34.017 | INFO     | __main__:direct_fix_all_tasks_parallel:112 - 总任务数: 164
+2025-10-25 13:42:34.017 | INFO     | __main__:direct_fix_all_tasks_parallel:121 - 使用 16 个并行进程
+2025-10-25 13:48:07.088 | INFO     | __main__:direct_fix_all_tasks_parallel:190 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:48:38.159 | INFO     | __main__:<module>:220 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:48:38.166 | INFO     | __main__:direct_fix_all_tasks_parallel:115 - 总任务数: 164
+2025-10-25 13:48:38.166 | INFO     | __main__:direct_fix_all_tasks_parallel:124 - 使用 16 个并行进程
+2025-10-25 13:51:19.300 | INFO     | __main__:direct_fix_all_tasks_parallel:193 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:52:08.353 | INFO     | __main__:<module>:218 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:52:08.358 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 总任务数: 164
+2025-10-25 13:52:08.359 | INFO     | __main__:direct_fix_all_tasks_parallel:122 - 使用 16 个并行进程
+2025-10-25 13:54:23.165 | INFO     | __main__:direct_fix_all_tasks_parallel:191 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 13:56:03.653 | INFO     | __main__:<module>:218 - 开始完整并行测试，使用 16 个进程
+2025-10-25 13:56:03.659 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 总任务数: 164
+2025-10-25 13:56:03.659 | INFO     | __main__:direct_fix_all_tasks_parallel:122 - 使用 16 个并行进程
+2025-10-25 13:58:18.886 | INFO     | __main__:direct_fix_all_tasks_parallel:191 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 22:31:04.994 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:31:05.008 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 22:31:05.008 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 22:32:26.258 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 22:34:25.766 | INFO     | __main__:<module>:218 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:34:25.768 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 总任务数: 164
+2025-10-25 22:34:25.768 | INFO     | __main__:direct_fix_all_tasks_parallel:122 - 使用 16 个并行进程
+2025-10-25 22:42:15.507 | INFO     | __main__:direct_fix_all_tasks_parallel:191 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 22:46:32.220 | INFO     | __main__:<module>:218 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:46:32.223 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 总任务数: 164
+2025-10-25 22:46:32.223 | INFO     | __main__:direct_fix_all_tasks_parallel:122 - 使用 16 个并行进程
+2025-10-25 22:47:43.756 | INFO     | __main__:<module>:218 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:47:43.760 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 总任务数: 164
+2025-10-25 22:47:43.760 | INFO     | __main__:direct_fix_all_tasks_parallel:122 - 使用 16 个并行进程
+2025-10-25 22:49:09.378 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:49:09.380 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 22:49:09.381 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 22:53:05.871 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 22:53:27.796 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 22:53:27.799 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 22:53:27.799 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 22:59:45.702 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 23:00:51.692 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:00:51.697 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:00:51.698 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:02:01.367 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:02:01.369 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:02:01.369 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:04:30.975 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:04:30.977 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:04:30.977 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:05:54.619 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 23:06:15.391 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:06:15.394 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:06:15.394 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:11:31.353 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 23:12:55.318 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:12:55.337 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:12:55.337 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:15:04.052 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 23:15:34.575 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:15:34.578 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:15:34.578 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:17:56.437 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-10-25 23:24:24.479 | INFO     | __main__:<module>:221 - 开始完整并行测试，使用 16 个进程
+2025-10-25 23:24:24.482 | INFO     | __main__:direct_fix_all_tasks_parallel:116 - 总任务数: 164
+2025-10-25 23:24:24.483 | INFO     | __main__:direct_fix_all_tasks_parallel:125 - 使用 16 个并行进程
+2025-10-25 23:30:05.313 | INFO     | __main__:direct_fix_all_tasks_parallel:194 - 详细结果已保存到 direct_fix_results.json
+2025-11-02 10:47:43.711 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-11-02 10:47:43.727 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-11-02 10:47:43.728 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-11-02 10:49:16.178 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json
+2025-11-02 10:59:15.122 | INFO     | __main__:<module>:209 - 开始完整并行测试，使用 16 个进程
+2025-11-02 10:59:15.124 | INFO     | __main__:direct_fix_all_tasks_parallel:104 - 总任务数: 164
+2025-11-02 10:59:15.124 | INFO     | __main__:direct_fix_all_tasks_parallel:113 - 使用 16 个并行进程
+2025-11-02 11:00:50.958 | INFO     | __main__:direct_fix_all_tasks_parallel:182 - 详细结果已保存到 direct_fix_results.json

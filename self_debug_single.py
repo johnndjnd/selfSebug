@@ -7,7 +7,7 @@ def selfdebug(task_id):
     """测试extract_testcases函数"""
     
     # 读取第i行数据
-    with open("data/humanevalfix/humanevalpack.jsonl", "r", encoding="utf-8") as f:
+    with open("dataset_test/humanevalfix/humanevalpack.jsonl", "r", encoding="utf-8") as f:
         for i, line in enumerate(f, 1):
             if i == task_id + 1:
                 data = json.loads(line.strip())
@@ -17,6 +17,7 @@ def selfdebug(task_id):
             return
     
     buggy_code = extract_buggy_code(data)
+    print(f"Flattened buggy code:\n{buggy_code}")
     example_test = data["example_test"]
     func_name = data["entry_point"]
     textcfg = TextCFG("buggy_code.py", func_name)
@@ -56,4 +57,4 @@ def selfdebug(task_id):
 
 if __name__ == "__main__":
     print("Starting to test new functions...")
-    selfdebug(42) 
+    selfdebug(163) 

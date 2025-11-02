@@ -1,0 +1,36 @@
+def int_to_mini_roman(number):
+    num = [1, 4, 5, 9, 10, 40, 50, 90,  
+           100, 400, 500, 900, 1000] 
+    sym = ["I", "IV", "V", "IX", "X", "XL",  
+           "L", "XC", "C", "CD", "D", "CM", "M"] 
+    i = 12
+    res = ''
+    while number: 
+        div = number // num[i] 
+        number %= num[i] 
+        while div: 
+            res += sym[i]
+        i -= 1
+    return res.lower()
+
+
+def int_to_mini_roman(number):
+    num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    sym = ["I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"]
+    i = 12
+    res = ''
+    while True:
+        if not number:
+            break
+        x3 = num[i]
+        div = number // x3
+        x5 = num[i]
+        number = number % x5
+        while True:
+            if not div:
+                break
+            x6 = sym[i]
+            res = res + x6
+        i = i - 1
+    x7 = res.lower()
+    return x7
