@@ -1,0 +1,1329 @@
+{
+  "summary": {
+    "total_processed": 164,
+    "with_test_cases": 158,
+    "no_test_cases": 6,
+    "successful_fixes": 6,
+    "test_passed": 6,
+    "test_failed": 0,
+    "debug_errors": 158,
+    "cfg_errors": 0,
+    "timeout_errors": 0,
+    "success_rate": 0.036585365853658534,
+    "test_pass_rate": 0.036585365853658534
+  },
+  "details": [
+    {
+      "task_id": "Python/1",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/2",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/4",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/6",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/0",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/3",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/5",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/7",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/9",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/8",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/11",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/14",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/13",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/10",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/12",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/15",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/16",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/17",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/19",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/21",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/20",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/18",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/22",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/23",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/24",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/26",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/27",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/25",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/28",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/29",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/30",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/32",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/34",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/33",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/35",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/36",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/37",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/40",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/42",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/31",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/44",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/43",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/39",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/47",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/46",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/45",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/48",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/49",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/53",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/51",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/52",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/54",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/57",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/58",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/56",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/55",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/59",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/60",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/62",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/63",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/64",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/65",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/61",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/67",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/66",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/69",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/68",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/70",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/71",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/75",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/72",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/73",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/74",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/76",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/77",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/79",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/78",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/80",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/81",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/82",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/85",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/86",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/87",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/88",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/89",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/90",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/91",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/92",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/93",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/94",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/95",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/96",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/97",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/98",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/99",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/100",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/101",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/102",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/103",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/104",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/106",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/105",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/107",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/108",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/109",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/110",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/111",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/112",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/113",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/114",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/115",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/116",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/117",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/118",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/119",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/120",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/121",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/122",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/123",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/124",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/125",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/126",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/127",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/128",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/130",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/129",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/131",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/132",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/133",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/134",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/135",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/136",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/137",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/138",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/139",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/141",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/142",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/140",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/143",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/144",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/145",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/146",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/147",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/148",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/149",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/150",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/151",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/152",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/153",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/154",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/155",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/156",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/157",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/158",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/159",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/161",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/162",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/163",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "No individual debug results",
+      "has_test_cases": true
+    },
+    {
+      "task_id": "Python/50",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/38",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/84",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/41",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/160",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/83",
+      "success": true,
+      "test_passed": true,
+      "error_type": null,
+      "details": "Success",
+      "has_test_cases": false
+    }
+  ]
+}

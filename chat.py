@@ -120,6 +120,7 @@ def get_completion_with_retry(messages, model=DEEPSEEK_MODEL, MAX_VLLM_RETRIES=M
                 response_format={
                     'type':'json_object',
                 },
+                max_tokens=8100,
                 timeout=120.0,  # 设置请求超时
             )
             
@@ -262,7 +263,7 @@ def direct_fix_code(task_description: str, test_case: str, buggy_code: str,reche
         return buggy_code
     
 
-def ai_critic_word(task_description: str, test_case: str, fixed_code: str, run_details: str = "") -> tuple:
+def ai_critic_word(task_description: str,textcfg: str,test_case: str, fixed_code: str, run_details: str = "") -> tuple:
     """
     使用另一个智能体来评审修复后的代码
     """
@@ -277,24 +278,37 @@ def ai_critic_word(task_description: str, test_case: str, fixed_code: str, run_d
     ```python
     {fixed_code}
     ```
+    ### CFG for the Fixed Code
+    {textcfg}
 
     {f"### In your previous Fix Attempt Details\n{run_details}" if run_details else ""}
 
+    You must analyze each test case using the following  process:
+
+Simulate execution with test case inputs**
+- Should ONLY rely on the CFG and the buggy code, DO NOT rely on the test cases and task description when executing the code.
+- Start with the initial variable state from each test case input
+- Execute the code following the CFG path step by step, starting from the Entry Point and ending at END (the Entry Point and END are Given in the CFG), recording detailed variable changes
+- When one Block has completed its execution and is about to move to another Block, please determine based on the CFG which Block should be executed next.
+- For control flow statements (if/while/for), clearly record condition evaluation results
+- Format: "Step i Block n: code_content -> variable_state_changes"
+
+
     ### Evaluation Criteria
     1. Analyze the fixed code to see if it meets the task description
     2. Determine if the fixed code would pass the provided test case
     Please respond with a JSON object in the following format:
-    ### Test Case
-    {test_case}
-    ### Fixed Code
-    ```python
-    {fixed_code}
-    ```
-    ### Evaluation Criteria
-    1. Analyze the fixed code to see if it meets the task description
-    2. Determine if the fixed code would pass the provided test case
-    Please respond with a JSON object in the following format:
-    {{"is_passed": true/false, "reason": "if not passed, provide reasons as detailed as possible"}}
+    {{ "step1_execution_trace": {{
+                "reasoning": "Detailed reasoning process for step-by-step execution",
+                "execution_steps": [
+                    "Step 1 Block i: code_content -> variable_state",
+                    "Step 2 Block j: code_content -> variable_state",
+                    "..."
+                ],
+                "final_output": "Final output"
+            }}
+    "is_passed": true/false, "reason": "if not passed, provide reasons as detailed as possible"
+    }}
     """
 
     messages = [
@@ -359,6 +373,8 @@ def chat_merge_debug_results(buggy_code: str, individual_results: List[str], tas
     """
     # 解析所有个别结果
     parsed_results = []
+
+
     for result in individual_results:
         try:
             parsed = json.loads(result)
@@ -367,9 +383,7 @@ def chat_merge_debug_results(buggy_code: str, individual_results: List[str], tas
             logger.error(f"Failed to parse individual result: {e}")
             continue
     
-    if not parsed_results:
-        logger.error("No valid individual results to merge")
-        return buggy_code
+
     
     # 构建合并提示
     individual_analyses = ""
@@ -387,7 +401,7 @@ Explanation: {result.get('explanation', 'No explanation')}
 
     prompt = f"""
 You are an expert Python programmer and tester. You have received multiple individual analyses of a buggy function, each focused on a specific test case. Your task is to test each proposed correction, evaluate the results, and select the optimal solution.
-
+if no individual analysis can fix the bug, you need to synthesize a new corrected code based on all individual analyses.
 Task Description
 {task_description}
 
@@ -478,6 +492,193 @@ Begin your testing and synthesis now.
     except Exception as e:
         logger.error(f"Merge debug error: {e}")
         return buggy_code
+
+def choose_better_result(buggy_code: str, result1: str, result2: str, task_description: str, test_case: List[str]) -> str:
+    """
+    比较两个调试结果，选择更好的一个
+    Args:
+        result1: 第一个调试结果
+        result2: 第二个调试结果
+        task_description: 任务描述
+        test_case: 测试用例
+    Returns:
+        更好的调试结果
+    """
+    prompt = f"""
+You are an expert Python programmer and debugger. and your last task is systematically analyze buggy code using detailed Chain-of-Thought reasoning and provide a corrected version.however, another agent has also provided a corrected version of the same buggy code.Your task is to compare both results and select the better one based on correctness,and the test result of their corrected code is given below,but the test result is given by the agent too,may also be wrong.you need to analyze the code logic by yourself to determine which result is better.
+in each result,you will given a cfg_test of the corrected code,which is the control flow graph of the corrected code,you should use it to help you analyze the code logic.
+
+Simulate execution with test case inputs**
+- Should ONLY rely on the CFG and the buggy code, DO NOT rely on the test cases and task description when executing the code.
+- Start with the initial variable state from each test case input
+- Execute the code following the CFG path step by step, starting from the Entry Point and ending at END (the Entry Point and END are Given in the CFG), recording detailed variable changes
+- When one Block has completed its execution and is about to move to another Block, please determine based on the CFG which Block should be executed next.
+- For control flow statements (if/while/for), clearly record condition evaluation results
+- Format: "Step i Block n: code_content -> variable_state_changes"
+- **Important:if the code contains loops,please follow the loop handling rules given above,hoever,if the loop is a dead loop that will never end,you should execute it step by step until 3 iterations**
+
+
+### Task Description
+{task_description}
+
+### original Buggy Code
+```python
+{buggy_code}
+```
+
+### Test Case
+```python
+{test_case}
+```
+
+### Result 1
+{result1}
+
+
+### Result 2
+{result2}
+
+
+### Selection Criteria
+1. Correctness: Which result correctly fixes the bug and passes the provided test case?(the most important criteria)
+2. Code Quality: Which result is more readable, efficient, and maintainable?
+
+### JSON Output Format
+Please output strictly in the following JSON format:
+```json
+{{
+"better_result_index": "1 or 2",
+"final_corrected_code": "the better corrected code between result 1 and result 2",
+"analysis": "Detailed analysis of both results based on the selection criteria",
+"selection_rationale": "Clear explanation of why the chosen result is better",
+result_1_"step1_execution_trace": {{
+    test_cases:[
+        {{      "test_case_id": "1",
+                "reasoning": "Detailed reasoning process for step-by-step execution",
+                "execution_steps": [
+                    "Step 1 Block i: code_content -> variable_state",
+                    "Step 2 Block j: code_content -> variable_state",
+                    "..."
+                ],
+                "final_output": "Final output"
+    "is_passed": true/false, "reason": "if not passed, provide reasons as detailed as possible"
+    }}
+    ]
+    }}
+,result_2_"step1_execution_trace": {{
+    test_cases:[
+        {{      "test_case_id": "1",
+                "reasoning": "Detailed reasoning process for step-by-step execution",
+                "execution_steps": [
+                    "Step 1 Block i: code_content -> variable_state",
+                    "Step 2 Block j: code_content -> variable_state",
+                    "..."
+                ],
+                "final_output": "Final output"
+    "is_passed": true/false, "reason": "if not passed, provide reasons as detailed as possible"
+    }}
+    ]
+    }}
+
+}}
+```
+"""
+
+    messages = [
+        {'role': 'user', 'content': prompt}
+    ]
+
+    try:
+        response = get_completion_with_retry(messages)
+        logger.info(f"choose better result response: {response}")
+
+        # 验证JSON格式
+        try:
+            return json.dumps(json.loads(response), ensure_ascii=False, indent=2)
+        except json.JSONDecodeError as e:
+            logger.error(f"Choose better result JSON parsing failed: {str(e)}")
+            return ""
+
+    except Exception as e:
+        logger.error(f"Choose better result error: {e}")
+        return ""
+
+def final_evaluate(buggy_code: str, top_candidates: list, task_description: str, test_case: List[str]) -> str:
+    """
+    让大模型评估 top_candidates（通常为前3个候选修复版本），选出最佳代码。
+    由于无法真实执行代码，大模型需基于逻辑一致性、语义正确性和任务描述合理性进行推断。
+    
+    Args:
+        buggy_code (str): 原始有bug的代码
+        top_candidates (list): 3个候选修复版本，每个元素为 dict 或 str（需包含 corrected_code 字段）
+        task_description (str): 任务描述
+        test_case (str): 相关测试用例（可为空字符串）
+
+    Returns:
+        str: JSON字符串，格式如下：
+        {
+            "best_index": int,             # 最优候选的索引（从1开始）
+            "final_corrected_code": str,   # 最优的修复代码
+            "evaluation_reasoning": str    # 详细评估过程说明
+        }
+    """
+    # 统一格式
+    formatted_candidates = []
+    for i, c in enumerate(top_candidates, start=1):
+        if isinstance(c, str):
+            try:
+                c = json.loads(c)
+            except Exception:
+                c = {"corrected_code": c}
+        formatted_candidates.append(f"Candidate {i}:\n{c.get('corrected_code', '')}")
+
+    # 构造 prompt
+    prompt = f"""
+You are an expert Python debugger. You are given a buggy code, a task description, and several candidate corrected versions.
+You must **select the best candidate** based on logical correctness, alignment with the task, and overall code quality.
+
+Here are the inputs:
+
+Task description:
+{task_description}
+
+Original buggy code:
+{buggy_code}
+
+
+Test case (if any):
+{test_case}
+
+Candidate corrected versions:
+{chr(10).join(formatted_candidates)}
+
+Please analyze each candidate carefully, simulate mentally how it would run, and choose the one that most likely fixes the bug and fulfills the task intent.
+
+Return your decision strictly in the following JSON format:
+{{
+    "best_index": 1-3,  # the chosen candidate number
+    "final_corrected_code": "the full corrected code of the chosen candidate",
+    "evaluation_reasoning": "detailed reasoning explaining your evaluation and why the chosen one is best"
+}}
+    """
+
+    # ---- 调用大模型评估 ----
+    message = [
+        {'role': 'system', 'content': "You are an expert Python programmer specializing in code evaluation and selection."},
+        {'role': 'user', 'content': prompt}
+    ]
+    response = get_completion_with_retry(message)  # 你自己的 LLM 调用接口
+    try:
+        result = json.loads(response)
+    except Exception:
+        # 如果模型输出非标准JSON，则安全fallback
+        result = {
+            "best_index": 1,
+            "final_corrected_code": top_candidates[0].get("corrected_code", ""),
+            "evaluation_reasoning": f"Failed to parse model output. Raw response: {response}"
+        }
+
+    return json.dumps(result, ensure_ascii=False, indent=2)
 
 
 def chat_selfdebug(buggy_code: str, example_test: str, task_description: str, text_cfg: str = "") -> str:
@@ -653,6 +854,191 @@ def safe_print(message: str):
     """线程安全的打印函数"""
     with print_lock:
         print(f"[{time.strftime('%H:%M:%S')}] {message}")
+
+
+def chat_selfdebug_debate(buggy_code: str, example_test: str, task_description: str, text_cfg: str = "") -> str:
+    """
+    自调试函数，提供更详细的CoT推理过程
+    Args:
+        buggy_code: 错误的代码
+        example_test: 测试用例代码字符串
+        task_description: 任务描述
+        text_cfg: 文本形式的控制流图
+    Returns:
+        JSON格式的调试结果
+    """
+    # print(f"text_cfg in chat_selfdebug: {text_cfg}")
+    # print(f"buggy_code in chat_selfdebug: {buggy_code}")
+    # print(f"example_test in chat_selfdebug: {example_test}")
+    # print(f"task_description in chat_selfdebug: {task_description}")
+    prompt = f"""
+You are an expert Python programmer and debugger. Your task is to systematically analyze buggy code using detailed Chain-of-Thought reasoning and provide a corrected version.
+
+
+### Buggy Code :do not care the function name
+```python
+{buggy_code}
+```
+
+### Task Description
+{task_description}
+
+### Control Flow Graph (CFG)
+{text_cfg if text_cfg else "No CFG provided"}
+
+### Test Cases
+```python
+{example_test}
+```
+
+### Systematic Analysis Instructions
+
+You must analyze each test case using the following 3-step process:
+
+**Step 1: Simulate execution with test case inputs**
+- Should ONLY rely on the CFG and the buggy code, DO NOT rely on the test cases and task description when executing the code.
+- Start with the initial variable state from each test case input
+- Execute the code following the CFG path step by step, starting from the Entry Point and ending at END (the Entry Point and END are Given in the CFG), recording detailed variable changes
+- When one Block has completed its execution and is about to move to another Block, please determine based on the CFG which Block should be executed next.
+- For control flow statements (if/while/for), clearly record condition evaluation results
+- Format: "Step i Block n: code_content -> variable_state_changes"
+
+**Step 2: Verify execution results**
+- After completing the execution trace, compare the final output with expected output
+- If outputs match exactly: "✅ Test passed"
+- If outputs don't match: "❌ Test failed: actual=[actual_result] vs expected=[expected_result]"
+
+**Step 3: Error analysis (when verification fails)**
+- Identify the specific code lines where errors occurred
+- Analyze the root cause: logic errors, condition errors, variable assignment errors, etc.
+- Reference the task description to understand what the code should do vs what it actually does
+- Provide specific suggestions for fixing the identified issues
+
+After analyzing ALL test cases, synthesize the findings to provide a final corrected code.
+When you provide the corrected code, you should not only consider the 3 steps above, but also consider the task description.
+
+### JSON Output Format
+Please output strictly in the following JSON format:
+{{
+    "analysis_results": [
+        {{
+            "testcase_id": 1,
+            "input_description": "Description of test case 1 input",
+            "expected_output": "Expected output result", 
+            "step1_execution_trace": {{
+                "reasoning": "Detailed reasoning process for step-by-step execution",
+                "execution_steps": [
+                    "Step 1 Block i: code_content -> variable_state",
+                    "Step 2 Block j: code_content -> variable_state",
+                    "..."
+                ],
+                "final_output": "Final output"
+            }},
+            "step2_verification": {{
+                "status": "Test passed" or "Test failed",
+                "actual_output": "Actual execution result", 
+                "comparison": "Detailed comparison explanation"
+            }},
+            "step3_error_analysis": {{
+                "has_error": true/false,
+                "error_blocks": ["block numbers with errors"],
+                "error_type": "error type",
+                "root_cause": "Detailed explanation of the root cause",
+                "fix_suggestion": "Specific fix suggestion"
+            }}
+        }}
+    ],
+    "overall_analysis": {{
+        "common_patterns": "Common error patterns across test cases",
+        "bug_classification": "Bug classification",
+        "fix_strategy": "Overall fix strategy"
+    }},
+    "correctedCode_test_analysis": {{
+        "corrected_code": "Final corrected code after considering all test cases",
+        "test_case_consideration": "Explanation of how the corrected code addresses each test case",
+        "test_cases": [
+           { {
+                "input": "Input for test case 1",
+                "expected_output": "Expected output for test case 1",
+                "actual_output": "Actual output for test case 1",
+                "status": "pass or fail"
+            }},
+            {{
+                "input": "Input for test case 2",
+                "expected_output": "Expected output for test case 2",
+                "actual_output": "Actual output for test case 2",
+                "status": "pass or fail"
+            }}
+        ],
+        "has_passed_all_tests": true/false
+    }},
+    
+    "explanation": "Detailed explanation of the changes made"
+}}
+
+### Quality Requirements
+1. **Execution Trace Accuracy**: Strictly follow code logic and show realistic variable state changes. Make sure follow the CFG Block by Block when executing the code. DO NOT rely on the test cases and task description when executing the code.
+2. **Error Analysis Depth**: Provide specific, actionable error analysis.
+3. **Code Quality**: Ensure the corrected code passes all test cases. Ensure the corrected code does not have any syntax errors. Ensure the import statements are included and correct for all used modules and functions. 
+4. **Reasoning Clarity**: Show clear logical reasoning throughout the analysis.
+5. **JSON Compliance**: Maintain proper JSON structure.
+
+Begin your systematic analysis now.
+
+IMPORTANT: Keep your total response under token limit to avoid truncation. If the response is too long, you can appropriately omit the execution trace. Remember keep the response json format.
+"""
+
+    messages = [
+        {'role': 'system', 'content': "You are an expert Python programmer specializing in systematic debugging using Chain-of-Thought reasoning."},
+        {'role': 'user', 'content': prompt}
+    ]
+
+    try:
+        response = get_completion_with_retry(messages)
+        logger.info(f"selfdebug response: {response}")
+        
+        # 验证JSON格式
+        try:
+            json.loads(response)
+            return response
+        except json.JSONDecodeError as e:
+            logger.error("="*50)
+            logger.error("chat_selfdebug中JSON解析失败！详细信息如下：")
+            logger.error(f"JSON错误详情: {str(e)}")
+            logger.error(f"响应总长度: {len(response) if response else 0} 字符")
+            logger.error(f"响应内容前500字符: {response[:500] if response else 'None'}...")
+            logger.error(f"响应内容后100字符: {response[-100:] if response and len(response) > 100 else 'N/A'}...")
+            logger.error("="*50)
+            # 返回一个错误的JSON结构
+            error_response = {
+                "analysis_results": [],
+                "overall_analysis": {
+                    "common_patterns": "JSON parsing failed",
+                    "bug_classification": "system_error",
+                    "fix_strategy": "Unable to analyze"
+                },
+                "corrected_code": buggy_code,
+                "explanation": f"JSON parsing error, returning original code: {str(e)}",
+                "error": str(e)
+            }
+            return json.dumps(error_response, indent=2, ensure_ascii=False)
+            
+    except Exception as e:
+        logger.error(f"selfdebug error: {e}")
+        # 返回错误的JSON结构
+        error_response = {
+            "analysis_results": [],
+            "overall_analysis": {
+                "common_patterns": "System error",
+                "bug_classification": "system_error", 
+                "fix_strategy": "Unable to analyze"
+            },
+            "corrected_code": buggy_code,
+            "explanation": f"Debugging process error, returning original code: {str(e)}",
+            "error": str(e)
+        }
+        return json.dumps(error_response, indent=2, ensure_ascii=False)
+    
     
 def conduct_debate(agent_results: List[AgentDebugResult], 
                    task_description: str,

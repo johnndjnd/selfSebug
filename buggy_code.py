@@ -1,13 +1,16 @@
-def generate_integers(a, b):
-    x1 = min(a, b)
-    lower = max(2, x1)
-    x3 = max(a, b)
-    upper = min(8, x3)
-    x5 = []
-    x6 = range(lower, upper)
-    for i in x6:
-        x7 = i % 2
-        x8 = x7 == 0
+from typing import List, Optional   # 未分解语句
+def longest(strings: List[str]):
+    x1 = not strings
+    if x1:
+        return None
+    x2 = []
+    for x in strings:
+        x3 = len(x)
+        x2.append(x3)
+    x5 = (x4 for x4 in x2)
+    maxlen = max(x5)
+    for s in strings:
+        x7 = len(s)
+        x8 = x7 > maxlen
         if x8:
-            x5.append(i)
-    return x5
+            return s

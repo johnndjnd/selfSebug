@@ -1,0 +1,1329 @@
+{
+  "summary": {
+    "total_processed": 164,
+    "with_test_cases": 1,
+    "no_test_cases": 163,
+    "successful_fixes": 0,
+    "test_passed": 0,
+    "test_failed": 0,
+    "debug_errors": 1,
+    "cfg_errors": 0,
+    "timeout_errors": 0,
+    "success_rate": 0.0,
+    "test_pass_rate": 0.0
+  },
+  "details": [
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "",
+      "success": false,
+      "test_passed": null,
+      "error_type": "skipped",
+      "details": "Skipped non-54 task",
+      "has_test_cases": false
+    },
+    {
+      "task_id": "Python/54",
+      "success": false,
+      "test_passed": null,
+      "error_type": "debug_error",
+      "details": "Debate error: All 3 attempts failed. Last error: Error code: 400 - {'error': {'message': 'Failed to deserialize the JSON body into the target type: messages: invalid type: string \"\\\\nYou are an expert Python debugger. You are given a buggy code, a task description, and several candidate corrected versions.\\\\nYou must **select the best candidate** based on logical correctness, alignment with the task, and overall code quality.\\\\n\\\\nHere are the inputs:\\\\n\\\\nTask description:\\\\nCheck if two words have the same characters.\\\\n>>> same_chars(\\'eabcdzzzz\\', \\'dddzzzzzzzddeddabc\\')\\\\nTrue\\\\n>>> same_chars(\\'abcd\\', \\'dddddddabc\\')\\\\nTrue\\\\n>>> same_chars(\\'dddddddabc\\', \\'abcd\\')\\\\nTrue\\\\n>>> same_chars(\\'eabcd\\', \\'dddddddabc\\')\\\\nFalse\\\\n>>> same_chars(\\'abcd\\', \\'dddddddabce\\')\\\\nFalse\\\\n>>> same_chars(\\'eabcdzzzz\\', \\'dddzzzzzzzddddabc\\')\\\\nFalse\\\\n\\\\nOriginal buggy code:\\\\ndef same_chars(s0: str, s1: str):\\\\n    x1 = s0 == s1\\\\n    return x1\\\\n\\\\n\\\\nTest case (if any):\\\\n[\\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'eabcdzzzz\\', \\'dddzzzzzzzddeddabc\\') == True\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\", \\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'abcd\\', \\'dddddddabc\\') == True\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\", \\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'dddddddabc\\', \\'abcd\\') == True\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\", \\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'eabcd\\', \\'dddddddabc\\') == False\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\", \\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'abcd\\', \\'dddddddabcf\\') == False\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\", \\\\\"\\\\\\\\ndef test_same_chars():\\\\\\\\n    assert same_chars(\\'eabcdzzzz\\', \\'dddzzzzzzzddddabc\\') == False\\\\\\\\n\\\\\\\\ntest_same_chars()\\\\\\\\n\\\\\"]\\\\n\\\\nCandidate corrected versions:\\\\nCandidate 1:\\\\ndef same_chars(s0: str, s1: str):\\\\n    return sorted(s0) == sorted(s1)\\\\nCandidate 2:\\\\ndef same_chars(s0: str, s1: str):\\\\n    return sorted(s0) == sorted(s1)\\\\nCandidate 3:\\\\ndef same_chars(s0: str, s1: str):\\\\n    return sorted(s0) == sorted(s1)\\\\n\\\\nPlease analyze each candidate carefully, simulate mentally how it would run, and choose the one that most likely fixes the bug and fulfills the task intent.\\\\n\\\\nReturn your decision strictly in the following JSON format:\\\\n{\\\\n    \\\\\"best_index\\\\\": 1-3,  # the chosen candidate number\\\\n    \\\\\"final_corrected_code\\\\\": \\\\\"the full corrected code of the chosen candidate\\\\\",\\\\n    \\\\\"evaluation_reasoning\\\\\": \\\\\"detailed reasoning explaining your evaluation and why the chosen one is best\\\\\"\\\\n}\\\\n    \", expected a sequence at line 1 column 2241', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "has_test_cases": true
+    }
+  ]
+}
